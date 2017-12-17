@@ -51,21 +51,9 @@ def tcp_block(packet):
             bck_pkt[TCP].flags = FIN | ACK
             bck_pkt[TCP].payload = b'block\r\n'
 
-    #print ("-----------------------------------------------")
-    #print (packet.show2())
-    #print (fwd_pkt.show2())
-    #print (bck_pkt.show2())
-    #sys.exit(1)
-
     sendp(fwd_pkt, iface=dev)
     sendp(bck_pkt, iface=dev)
-    print ("send!")
-
-
-
-
-
 
 if __name__ == "__main__":
     init()
-    sniff(iface=dev, prn=tcp_block, filter="tcp and tcp port 80")
+    sniff(iface=dev, prn=tcp_block, filter="tcp")
